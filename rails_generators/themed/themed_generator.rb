@@ -78,6 +78,16 @@ protected
     m.template("view_signup.html.#{@engine}",  File.join("app/views", signup_controller_path, "new.html.#{@engine}"))
     m.template("view_signin.html.#{@engine}",  File.join("app/views", signin_controller_path, "login.html.#{@engine}"))
   end
+
+
+  def manifest_for_authlogic(m)
+    signup_controller_path  = @controller_file_path # the user
+    signin_controller_path  = @model_name.downcase # just here I use the second argument as a controller path // the user_session
+    @resource_name          = @controller_path.underscore
+    m.template("view_signup_authlogic.html.#{@engine}",  File.join("app/views", signup_controller_path, "new.html.#{@engine}")) # user (create new user, aka signin, aka register)
+    m.template("view_signin_authlogic.html.#{@engine}",  File.join("app/views", signin_controller_path, "new.html.#{@engine}")) # user_session (login)
+  end
+
   
   def manifest_for_text(m)
     m.directory(File.join('app/views', @controller_file_path))    
